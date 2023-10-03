@@ -7,70 +7,22 @@ export default function Card({ productImg, productName, id, productDetail }) {
   return (
     <>
       <div
-        style={{
-          width: '500px',
-          height: '200px',
-          backgroundColor: '#f2f2f2',
-          //   border: '1px solid #ccc',
-          borderRadius: '10px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-          overflow: 'hidden'
-        }}
+        className="w-[500px] h-[200px] bg-gray-200 rounded-lg shadow-md overflow-hidden cursor-pointer"
         role="button"
         onClick={() => {
           navigate(`/product/${id}`);
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            height: '100%'
-          }}
-        >
+        <div className="flex w-[full] h-[full]">
           <img
+            className="w-1/2 h-full object-cover overflow-hidden"
             src={productImg}
-            style={{
-              width: '50%',
-              height: '100%',
-              objectFit: 'cover',
-              overflow: 'hidden'
-            }}
             alt={productName}
           />
-          <div
-            style={{
-              width: '50%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '8px',
-              padding: '10px',
-              overflow: 'hidden'
-            }}
-          >
-            <div
-              style={{
-                fontSize: '18px',
+          <div className="w-1/2 flex flex-col items-start gap-2 p-[8px] overflow-hidden">
+            <div className="text-xl font-bold text-blue-500">{productName}</div>
 
-                fontWeight: 'bold',
-                color: 'blue'
-              }}
-            >
-              {productName}
-            </div>
-
-            <div
-              style={{
-                fontSize: '12px',
-                height: '100%',
-                width: '100%',
-                overflow: 'hidden',
-                whiteSpace: 'pre-wrap',
-                wordWrap: 'break-word'
-              }}
-            >
+            <div className=" text-sm h-full w-full overflow-hidden whitespace-pre-wrap break-words">
               {productDetail}
             </div>
           </div>

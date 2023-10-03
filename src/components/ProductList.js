@@ -37,15 +37,7 @@ export default function ProductList() {
   ];
 
   return (
-    <div
-      style={{
-        display: 'grid', // กำหนดให้แสดงองค์ประกอบภายในเป็นรูปแบบ Grid
-        gridTemplateColumns: 'repeat(2, minmax(375px, 1fr))', // กำหนดให้มี 2 คอลัมน์ โดยแต่ละคอลัมน์มีขนาดเท่ากัน (1fr)
-        gridTemplateRows: 'repeat(auto-fill, minmax(220px, 1fr))', // กำหนดให้มีแถวแนวตั้งแบบอัตโนมัติ โดยแต่ละแถวมีความสูงอย่างน้อย 220px และสามารถขยายตามพื้นที่ที่มีอยู่ (1fr)
-        gridColumnGap: '10px', // เพิ่มระยะห่างระหว่างคอลัมน์เป็น 10px
-        gap: '3px' // กำหนดระยะห่างระหว่างแต่ละองค์ประกอบ
-      }}
-    >
+    <div className="grid  gap-x-10 gap-y-3  lg:grid-cols-2">
       {product.map((el) => (
         <Card
           productImg={el.productImg}

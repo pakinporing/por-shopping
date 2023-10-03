@@ -4,25 +4,9 @@ import ProductList from '../components/ProductList';
 export default function HomePage() {
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '10px'
-        }}
-      >
+      <div className="flex flex-col items-center justify-center gap-10">
         <Header />
-        <div
-          style={{
-            fontSize: '32px',
-            fontWeight: 'bold',
-            color: '#157696'
-          }}
-        >
-          PRODUCTS
-        </div>
+        <div className="text-3xl font-bold text-blue-600">PRODUCTS</div>
         <ProductList />
       </div>
     </>
