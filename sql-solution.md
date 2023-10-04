@@ -1,0 +1,42 @@
+คำตอบข้อที่1
+
+- SELECT
+  a.AGENT_NAME,
+  SUM(o.ORD_AMOUNT) AS TOTAL_ORDER_AMOUNT
+  FROM
+  agents a
+  JOIN
+  orders o ON a.AGENT_CODE = o.AGENT_CODE
+  GROUP BY
+  a.AGENT_NAME
+  ORDER BY
+  TOTAL_ORDER_AMOUNT DESC
+  LIMIT 1;
+
+คำตอบข้อที่2
+
+- SELECT
+  c.CUST_CODE,
+  c.CUST_NAME,
+  SUM(o.ORD_AMOUNT) AS TOTAL_ORDER_AMOUNT
+  FROM
+  customer c
+  JOIN
+  orders o ON c.CUST_CODE = o.CUST_CODE
+  WHERE
+  o.ORD_AMOUNT > 5000.00
+  GROUP BY
+  c.CUST_CODE, c.CUST_NAME
+
+คำตอบข้อที่3
+
+- SELECT
+  o.AGENT_CODE,
+  COUNT(\*) AS TOTAL_ORDERS
+  FROM
+  orders o
+  WHERE
+  YEAR(o.ORD_DATE) = 2008
+  AND MONTH(o.ORD_DATE) = 7
+  GROUP BY
+  o.AGENT_CODE
