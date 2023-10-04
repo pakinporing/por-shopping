@@ -82,6 +82,18 @@ export default function HomePage() {
 
                 <div className="bg-[#ffffff] w-full h-1/2 rounded-[30px] mx-auto p-[20px]">
                   <form className="flex flex-col gap-3 items-stretch">
+                    <div className="form-control w-full max-w-xs">
+                      <label className="label">
+                        <span className="label-text">เลือกรูปภาพ</span>
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="file-input file-input-bordered w-full max-w-xs"
+                      />
+                    </div>
+
                     <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text">ชื่อสินค้า</span>
@@ -115,18 +127,6 @@ export default function HomePage() {
                             price: e.target.value
                           })
                         }
-                      />
-                    </div>
-
-                    <div className="form-control w-full max-w-xs">
-                      <label className="label">
-                        <span className="label-text">เลือกรูปภาพ</span>
-                      </label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="file-input file-input-bordered w-full max-w-xs"
                       />
                     </div>
 
