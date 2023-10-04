@@ -9,18 +9,18 @@ export default function HomePage() {
   const [formData, setFormData] = useState({
     productName: '',
     productDetail: '',
-    price: ''
+    price: '',
+    productImg: null
   });
 
   const [dataDelete, setDataDelete] = useState('');
-
-  console.log(dataDelete);
 
   const handleClickSave = () => {
     const newProduct = {
       productName: formData.productName,
       productDetail: formData.productDetail,
-      price: formData.price
+      price: formData.price,
+      productImg: formData.productImg // เพิ่ม productImg ลงในรายการผลิตภัณฑ์
     };
 
     const newP = [...product, newProduct];
@@ -30,7 +30,8 @@ export default function HomePage() {
     setFormData({
       productName: '',
       productDetail: '',
-      price: ''
+      price: '',
+      productImg: null // รีเซ็ต productImg เมื่อบันทึกเสร็จ
     });
 
     const modal = document.getElementById('my_modal_3');
@@ -48,6 +49,11 @@ export default function HomePage() {
 
     const modal = document.getElementById('my_modal_4');
     modal.close();
+  };
+
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFormData({ ...formData, productImg: imageFile }); // เพิ่มการจัดเก็บรูปภาพเมื่อมีการเลือกไฟล์
   };
 
   return (
@@ -112,12 +118,24 @@ export default function HomePage() {
                       />
                     </div>
 
+                    <div className="form-control w-full max-w-xs">
+                      <label className="label">
+                        <span className="label-text">เลือกรูปภาพ</span>
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="file-input file-input-bordered w-full max-w-xs"
+                      />
+                    </div>
+
                     <div className="form-control">
                       <label className="label">
                         <span className="label-text">คำอธิบาย</span>
                       </label>
                       <textarea
-                        className="textarea textarea-bordered h-24"
+                        className="textarea textarea-bordered h-24 resize-none"
                         placeholder="เพิ่มคำอธิบายของคุณ"
                         value={formData.productDetail}
                         onChange={(e) =>
