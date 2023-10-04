@@ -7,22 +7,25 @@ export default function Card({ productImg, productName, id, productDetail }) {
   return (
     <>
       <div
-        className="w-[500px] h-[200px] bg-gray-200 rounded-lg shadow-md overflow-hidden cursor-pointer"
+        className="w-full h-[200px] bg-gray-200 rounded-lg shadow-md overflow-hidden cursor-pointer m-2"
         role="button"
         onClick={() => {
-          navigate(`/product/${id}`);
+          navigate(`/product/${productName}`);
         }}
       >
         <div className="flex w-[full] h-[full]">
           <img
-            className="w-1/2 h-full object-cover overflow-hidden"
+            className="w-1/2 h-full object-fill overflow-hidden"
             src={productImg}
             alt={productName}
           />
-          <div className="w-1/2 flex flex-col items-start gap-2 p-[8px] overflow-hidden">
-            <div className="text-xl font-bold text-blue-500">{productName}</div>
 
-            <div className=" text-sm h-full w-full overflow-hidden whitespace-pre-wrap break-words">
+          <div className="w-1/2 flex flex-col items-start gap-[1px] p-[8px] overflow-hidden justify-items-center">
+            <div className="text-xl font-bold text-blue-500 overflow-hidden w-[95%]">
+              {productName}
+            </div>
+
+            <div className=" text-sm h-[150px] w-full overflow-hidden whitespace-pre-wrap break-words">
               {productDetail}
             </div>
           </div>

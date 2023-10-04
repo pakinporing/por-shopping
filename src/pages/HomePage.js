@@ -1,12 +1,199 @@
 import Header from '../components/Header';
 import ProductList from '../components/ProductList';
+import useDataProduct from '../hooks/useDataProduct';
+import React, { useState } from 'react';
 
 export default function HomePage() {
+  const { product, setProduct } = useDataProduct();
+
+  const [formData, setFormData] = useState({
+    productName: '',
+    productDetail: '',
+    price: ''
+  });
+
+  const [dataDelete, setDataDelete] = useState('');
+
+  console.log(dataDelete);
+
+  const handleClickSave = () => {
+    const newProduct = {
+      productName: formData.productName,
+      productDetail: formData.productDetail,
+      price: formData.price
+    };
+
+    const newP = [...product, newProduct];
+
+    setProduct(newP);
+
+    setFormData({
+      productName: '',
+      productDetail: '',
+      price: ''
+    });
+
+    const modal = document.getElementById('my_modal_3');
+    modal.close();
+  };
+
+  const deleteProductByProductName = (productNameToDelete) => {
+    const productDataUpdated = product.filter(
+      (el) => el.productName !== productNameToDelete
+    );
+
+    setProduct(productDataUpdated);
+
+    setDataDelete('');
+
+    const modal = document.getElementById('my_modal_4');
+    modal.close();
+  };
+
   return (
     <>
+      <Header />
       <div className="flex flex-col items-center justify-center gap-10">
-        <Header />
         <div className="text-3xl font-bold text-blue-600">PRODUCTS</div>
+        <div className="flex items-center justify-space-evenly gap-8 h-full">
+          <div>
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <button
+              className="btn btn-success"
+              onClick={() => document.getElementById('my_modal_3').showModal()}
+            >
+              เพิ่ม
+            </button>
+            <dialog id="my_modal_3" className="modal">
+              <div className="modal-box">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
+                <h3 className="font-bold text-lg">เพิ่ม!</h3>
+
+                <div className="bg-[#ffffff] w-full h-1/2 rounded-[30px] mx-auto p-[20px]">
+                  <form className="flex flex-col gap-3 items-stretch">
+                    <div className="form-control w-full ">
+                      <label className="label">
+                        <span className="label-text">ชื่อสินค้า</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="เพิ่มชื่อสินค้าที่คุณต้องการ"
+                        value={formData.productName}
+                        className="input input-bordered w-full "
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            productName: e.target.value
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="form-control w-full ">
+                      <label className="label">
+                        <span className="label-text">ราคา</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="เพิ่มราคาสินค้าที่คุณต้องการ"
+                        value={formData.price}
+                        className="input input-bordered w-full "
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            price: e.target.value
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text">คำอธิบาย</span>
+                      </label>
+                      <textarea
+                        className="textarea textarea-bordered h-24"
+                        placeholder="เพิ่มคำอธิบายของคุณ"
+                        value={formData.productDetail}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            productDetail: e.target.value
+                          })
+                        }
+                      ></textarea>
+                    </div>
+
+                    <button
+                      className="btn btn-success"
+                      role="button"
+                      type="button"
+                      onClick={handleClickSave}
+                    >
+                      SAVE
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </div>
+          <div>
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <button
+              className="btn btn-error"
+              onClick={() => document.getElementById('my_modal_4').showModal()}
+            >
+              ลบ
+            </button>
+            <dialog id="my_modal_4" className="modal">
+              <div className="modal-box">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
+                <h3 className="font-bold text-lg">ลบ!</h3>
+                <div className="bg-[#ffffff] w-full h-1/2 rounded-[30px] mx-auto p-[20px]">
+                  <form className="flex flex-col gap-3 items-stretch">
+                    <div className="form-control w-full ">
+                      <label className="label">
+                        <span className="label-text">
+                          ชื่อสินค้าที่ต้องการลบ โปรดพิมให้ถูกต้อง
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="โปรดพิมชื่อสินค้าที่ต้องการลบให้ถูกต้อง"
+                        value={dataDelete}
+                        className="input input-bordered w-full "
+                        onChange={(e) => setDataDelete(e.target.value)}
+                      />
+                    </div>
+
+                    <button
+                      className="btn btn-error"
+                      role="button"
+                      type="button"
+                      onClick={() => {
+                        if (dataDelete !== undefined) {
+                          deleteProductByProductName(dataDelete);
+                        }
+                      }}
+                    >
+                      DELETE
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </div>
+        </div>
         <ProductList />
       </div>
     </>

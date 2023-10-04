@@ -1,52 +1,22 @@
-import ProductImgTest from '../assets/35012cebc73b17d381928ce69f670318.jpg';
+import useDataProduct from '../hooks/useDataProduct';
 import Card from '../components/Card';
+
 export default function ProductList() {
-  const product = [
-    {
-      id: 1,
-      productName: 'Sumsung',
-      productDetail:
-        '11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
-      productImg: ProductImgTest,
-      price: 20000
-    },
-    {
-      id: 2,
-      productName: 'Nokia',
-      productDetail:
-        '2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222',
-      productImg: ProductImgTest,
-      price: 12000
-    },
-    {
-      id: 3,
-      productName: 'Iphone',
-      productDetail:
-        '333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333',
-      productImg: ProductImgTest,
-      price: 35000
-    },
-    {
-      id: 4,
-      productName: 'Xiaomi',
-      productDetail:
-        '4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444',
-      productImg: ProductImgTest,
-      price: 18000
-    }
-  ];
+  const { product, setProduct } = useDataProduct();
 
   return (
-    <div className="grid  gap-x-10 gap-y-3  lg:grid-cols-2">
-      {product.map((el) => (
-        <Card
-          productImg={el.productImg}
-          productName={el.productName}
-          productDetail={el.productDetail}
-          key={el.id}
-          id={el.id}
-        />
-      ))}
+    <div className="grid gap-x-10 gap-y-3  lg:grid-cols-2 w-4/5 ">
+      {product
+        .filter((el) => el.productName)
+        .map((el) => (
+          <Card
+            productImg={el.productImg}
+            productName={el.productName}
+            productDetail={el.productDetail}
+            key={el.productName}
+            id={el.id}
+          />
+        ))}
     </div>
   );
 }
